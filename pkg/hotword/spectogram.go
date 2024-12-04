@@ -26,11 +26,11 @@ func DefaultLogMelSpectrogram() *LogMelSpectrogram {
 		sampleRate,
 		0.025,                 // window length (seconds)
 		0.01,                  // window step (seconds)
-		26,                    // number of mel bands
+		64,                    // FILT size
 		512,                   // FFT size
 		0,                     // low frequency
 		float32(sampleRate)/2, // high frequency
-		0.97,                  // preemphasis coefficient
+		0.93,                  // preemphasis coefficient
 		HannWindow,            // window function
 	)
 }
