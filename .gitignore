@@ -1,0 +1,16 @@
+bin/
+build/
+dist/
+env/*
+EfficientWord-Net/
+
+.vscode/
+.idea/
+!.gitignore
+.DS_Store
+
+go.work.sum
+__debug_bin*
+cover.*
+onnxruntime-*
+test_audio*
