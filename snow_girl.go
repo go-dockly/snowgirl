@@ -7,6 +7,7 @@ import (
 	"github.com/algo-boyz/snowgirl/pkg/audio"
 	"github.com/algo-boyz/snowgirl/pkg/hotword"
 	"github.com/algo-boyz/snowgirl/pkg/onnx"
+	"github.com/algo-boyz/snowgirl/pkg/silence"
 	"github.com/algo-boyz/snowgirl/pkg/state"
 )
 
@@ -25,6 +26,7 @@ func DefaultConfig() Config {
 type SnowGirl struct {
 	cfg          Config
 	ctx          state.Context
+	silenceModel *silence.Model
 	hotwordModel *hotword.Model
 	logMelSpec   *hotword.LogMelSpectrogram
 	mic          *audio.MicStream
@@ -39,6 +41,10 @@ func NewSnowGirl(ctx state.Context, cfg Config) (*SnowGirl, error) {
 	if err != nil {
 		return nil, err
 	}
+	silenceModel, err := silence.NewModel(ctx, silence.DefaultConfig(), nil)
+	if err != nil {
+		return nil, err
+	}
 	stream, err := audio.NewMicStream(ctx, 1.5, 0.75)
 	if err != nil {
 		return nil, fmt.Errorf("failed to create mic stream: %w", err)
@@ -50,6 +56,7 @@ func NewSnowGirl(ctx state.Context, cfg Config) (*SnowGirl, error) {
 		ctx:          ctx,
 		cfg:          cfg,
 		mic:          stream,
+		silenceModel: silenceModel,
 		hotwordModel: hotwordModel,
 		logMelSpec:   hotword.DefaultLogMelSpectrogram(),
 	}, nil

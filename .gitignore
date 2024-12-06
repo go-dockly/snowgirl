@@ -3,6 +3,8 @@ build/
 dist/
 env/*
 EfficientWord-Net/
+model/yolo/
+siler-vad/
 
 .vscode/
 .idea/

@@ -2,7 +2,9 @@ package audio
 
 import (
 	"fmt"
+	"math"
 	"sync"
+	"time"
 	"unsafe"
 
 	"github.com/algo-boyz/snowgirl/pkg/state"
@@ -141,7 +143,10 @@ func NewMicStream(ctx state.Context, windowLengthSecs, slidingWindowSecs float32
 		framesPerBuffer: chunkSize,
 		stream:          stream,
 	}
-	go micStream.broadcast(ctx)
+	go func() {
+		time.Sleep(time.Minute)
+		micStream.broadcast(ctx)
+	}()
 	return micStream, nil
 }
 
@@ -196,9 +201,9 @@ func (s *MicStream) broadcast(ctx state.Context) {
 	}
 }
 
-func round(f float32) int {
-	if f < 0 {
-		return int(f - 0.5)
+func round(v float32) int {
+	if v >= 0 {
+		return int(math.Floor(float64(v + 0.5)))
 	}
-	return int(f + 0.5)
+	return int(math.Ceil(float64(v - 0.5)))
 }

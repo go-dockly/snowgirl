@@ -16,3 +16,4 @@
 - multi wakewords in parallel
 - Pause/Resume hotword detection
 - adjustable mic stream window length per subscriber
+- https://github.com/gen2brain/malgo explore malgo to replace portaudio as it is cross platform(windows)

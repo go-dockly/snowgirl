@@ -7,16 +7,18 @@ import (
 
 	"github.com/algo-boyz/snowgirl/pkg/hotword"
 	"github.com/algo-boyz/snowgirl/pkg/onnx"
+	"github.com/algo-boyz/snowgirl/pkg/silence"
 	"github.com/algo-boyz/snowgirl/pkg/state"
 )
 
 var (
-	ctx                              = state.NewContext()
-	hotwordEmbedPath, hotwordNetPath string
-	err                              error
+	ctx                                                        = state.NewContext()
+	onnxPath, hotwordEmbedPath, silenceNetPath, hotwordNetPath string
+	err                                                        error
 )
 
 func init() {
+	flag.StringVar(&silenceNetPath, "silence", silence.OnnxModelPath(), "silero-vad .onnx path")
 	flag.StringVar(&hotwordNetPath, "hotword", hotword.OnnxModelPath(), "efficient-wordnet .onnx path")
 	flag.StringVar(&hotwordEmbedPath, "embedding", hotword.EmbeddingsPath(), "hotword embedding .json path")
 }

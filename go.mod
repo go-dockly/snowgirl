@@ -7,7 +7,6 @@ require (
 	github.com/gordonklaus/portaudio v0.0.0-20230709114228-aafa478834f5
 	github.com/hajimehoshi/go-mp3 v0.3.4
 	github.com/mjibson/go-dsp v0.0.0-20180508042940-11479a337f12
-	github.com/streamer45/silero-vad-go v0.2.1
 	github.com/stretchr/testify v1.10.0
 	github.com/yalue/onnxruntime_go v1.13.0
 	go.uber.org/multierr v1.11.0
